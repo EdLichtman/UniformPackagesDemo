@@ -1,0 +1,136 @@
+root = true
+
+[*]
+indent_style = space
+
+# XML project files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj,props}]
+indent_size = 2
+
+# C# files
+[*.cs]
+indent_size = 4
+insert_final_newline = true
+charset = utf-8-bom
+
+#categories
+# Enable more with:  https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/categories
+dotnet_analyzer_diagnostic.category-CodeQuality.severity = warning
+dotnet_analyzer_diagnostic.category-Style.severity = error
+
+# Use of 'var' instead of type declaration
+dotnet_diagnostic.IDE0007.severity = warning
+dotnet_diagnostic.IDE0008.severity = none
+csharp_style_var_for_built_in_types = true
+
+# Allow declared namespaces
+csharp_style_namespace_declarations = file_scoped
+
+# Less Important:
+# Expression-Body for accessors
+dotnet_diagnostic.IDE0027.severity = suggestion
+# Methods that return a value not being assigned
+dotnet_diagnostic.IDE0058.severity = suggestion
+
+# Redundant? Legacy?
+dotnet_diagnostic.CA2220.severity = warning
+
+# Todo: look into these later -- it might mean rewriting some logging code.
+dotnet_diagnostic.CA1848.severity = none # build a new logging delegate framework and set to warning
+dotnet_diagnostic.CA2254.severity = suggestion # warning in new microservices?
+dotnet_diagnostic.IDE0066.severity = suggestion
+
+# Prefer target-typed object creation
+dotnet_diagnostic.IDE0090.severity = warning
+csharp_style_implicit_object_creation_when_type_is_apparent = true
+
+# suggest using nameof. So many places use Contracts
+dotnet_diagnostic.CA1507.severity = suggestion
+
+# Requires you to specify IFormatProvider when a method has an overload that contains IFormatProvider
+dotnet_diagnostic.CA1305.severity = suggestion # todo: confirm with Eric
+
+# Requires you to use compound assignment, which is setting a variable that may be null with '??='. 
+# Since it's so new and unusual, mark as suggestion
+dotnet_diagnostic.IDE0074.severity = suggestion
+
+# Requires you to simplify names when possible, i.e. System.String should be String when importing System.
+dotnet_diagnostic.IDE0001.severity = suggestion
+
+# Requires you to use 'this' or 'Me'
+dotnet_diagnostic.IDE0003.severity = none
+dotnet_diagnostic.IDE0009.severity = error
+dotnet_style_qualification_for_field = true
+dotnet_style_qualification_for_property = true
+dotnet_style_qualification_for_method = true
+dotnet_style_qualification_for_event = true
+
+# Issues a warning when an Obsolete class member is referenced.
+dotnet_diagnostic.CS0618.severity = none
+
+#Prefer language keywords instead of framework type names for type references
+dotnet_diagnostic.IDE0049.severity = warning
+
+# 'if' statement can be simplified
+dotnet_diagnostic.IDE0046.severity = suggestion
+
+############################## Begin Custom Naming Conventions ###############################
+# Declare Capitalization styles
+dotnet_naming_style.camel_case.capitalization = camel_case
+dotnet_naming_style.first_word_upper = first_word_upper
+
+#Declare available symbol types
+dotnet_naming_symbols.private_instance_field.applicable_kinds = field
+dotnet_naming_symbols.private_instance_field.applicable_accessibilities = private
+
+dotnet_naming_symbols.const.applicable_kinds = field
+dotnet_naming_symbols.const.applicable_accessibilities = private
+dotnet_naming_symbols.const.required_modifiers = const
+
+dotnet_naming_symbols.private_readonly_static.applicable_kinds = field
+dotnet_naming_symbols.private_readonly_static.applicable_accessibilities = private
+dotnet_naming_symbols.private_readonly_static.required_modifiers = readonly, static
+
+# Make Const HaveFirstWordUppercase
+dotnet_naming_rule.const_members_must_be_first_word_upper.symbols = const
+dotnet_naming_rule.const_members_must_be_first_word_upper.style = first_word_upper
+dotnet_naming_rule.const_members_must_be_first_word_upper.severity = warning
+
+# Prevent Const from requiringFirstWordLowercase due to private instance fields
+dotnet_naming_rule.const_members_should_not_be_pascal_case.symbols = const
+dotnet_naming_rule.const_members_should_not_be_pascal_case.style = camel_case
+dotnet_naming_rule.const_members_should_not_be_pascal_case.severity = none
+
+# Make Const HaveFirstWordUppercase
+dotnet_naming_rule.private_readonly_static_members_must_be_first_word_upper.symbols = private_readonly_static
+dotnet_naming_rule.private_readonly_static_members_must_be_first_word_upper.style = first_word_upper
+dotnet_naming_rule.private_readonly_static_members_must_be_first_word_upper.severity = warning
+
+# Prevent Const from requiringFirstWordLowercase due to private instance fields
+dotnet_naming_rule.private_readonly_static_members_should_not_be_pascal_case.symbols = private_readonly_static
+dotnet_naming_rule.private_readonly_static_members_should_not_be_pascal_case.style = camel_case
+dotnet_naming_rule.private_readonly_static_members_should_not_be_pascal_case.severity = none
+
+# Make private instance fields havePascalCase
+dotnet_naming_rule.private_instance_field_members_must_be_pascal_case.symbols = private_instance_field
+dotnet_naming_rule.private_instance_field_members_must_be_pascal_case.style = camel_case
+dotnet_naming_rule.private_instance_field_members_must_be_pascal_case.severity = warning
+
+############################## Begin Stylecop ###############################
+
+dotnet_diagnostic.SA1000.severity = none # this is a big change because of new()
+dotnet_diagnostic.SA1009.severity = none # this is a big change because of null forgiving operator!
+dotnet_diagnostic.SA1003.severity = suggestion
+dotnet_diagnostic.SA1025.severity = suggestion
+dotnet_diagnostic.SA1028.severity = none
+dotnet_diagnostic.SA1118.severity = suggestion
+dotnet_diagnostic.SA1121.severity = none
+dotnet_diagnostic.SA1127.severity = none
+dotnet_diagnostic.SA1128.severity = none
+dotnet_diagnostic.SA1133.severity = suggestion
+dotnet_diagnostic.SA1305.severity = warning
+dotnet_diagnostic.SA1404.severity = suggestion
+dotnet_diagnostic.SA1625.severity = suggestion
+dotnet_diagnostic.SA1629.severity = suggestion
+dotnet_diagnostic.SA1633.severity = none
+dotnet_diagnostic.SA1413.severity = none

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <PackageType>Template</PackageType>
+      <PackageId>Demo.Templates</PackageId>
+      <Version>0.0.1</Version>
+      <Title>Demo Templates</Title>
+      <Authors>Edward Lichtman</Authors>
+      <Description>Templates to use when creating an application for this demo.</Description>
+      <PackageTags>dotnet-new;templates;nx</PackageTags>
+      <TargetFramework>net6.0</TargetFramework>
+      <IncludeContentInPack>true</IncludeContentInPack>
+      <IncludeBuildOutput>false</IncludeBuildOutput>
+      <ContentTargetFolders>content</ContentTargetFolders>
+
+      <!-- <PackageIcon>logo.png</PackageIcon> -->
+      <OutputDir>bin\</OutputDir>
+    </PropertyGroup>
+  
+    <ItemGroup>
+      <Content Include="templates\**\*" />
+      <Content Remove="**\bin\**" />
+      <Content Remove="**\obj\**" />
+      <Content Remove="**\packages\**" />
+      <Content Remove="**\*.filelist" />
+      <Content Remove="**\*.user" />
+      <Content Remove="**\.vs/**" />
+      <Content Remove="**\.idea\**" />
+      <Content Remove="**\.nuke\temp\**" />
+
+      <Compile Remove="**\*" />
+      <!-- <Content Include=".\logo.png" PackagePath="\" /> -->
+    </ItemGroup>
+  </Project>

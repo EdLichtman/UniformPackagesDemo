@@ -1,0 +1,47 @@
+<Project>
+  <PropertyGroup Label="StandardProperties">
+    <IsPackable>true</IsPackable>
+
+    <PackageId>$(MSBuildProjectName)</PackageId>
+    <PackageTags>common lib,demo</PackageTags>
+
+    <Authors>Edward Lichtman</Authors>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU;x64</Platforms>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Configurations>Debug;Release;Develop</Configurations>
+  </PropertyGroup>
+  
+  <PropertyGroup Label="DebugNugetPackages">
+    <IncludeSymbols>true</IncludeSymbols>
+    <EmbedAllSources>True</EmbedAllSources>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <IsUnitTestLibrary>$([System.String]::Copy('$(MSBuildProjectFile)').ToLower().EndsWith('unit.tests.csproj'))</IsUnitTestLibrary>
+    <IsIntegrationTestLibrary>$([System.String]::Copy('$(MSBuildProjectFile)').ToLower().EndsWith('integration.tests.csproj'))</IsIntegrationTestLibrary>
+
+    <FollowsTestLibraryConvention>false</FollowsTestLibraryConvention>
+    <FollowsTestLibraryConvention Condition="'$(IsUnitTestLibrary)' == 'true' or '$(IsIntegrationTestLibrary)' == 'true'">true</FollowsTestLibraryConvention>
+  </PropertyGroup>
+
+  <Target Name="EnsureVersionIsSet" BeforeTargets="BeforeBuild" Condition="'$(VersionPrefix)' == '$(Version)' and '$(FollowsTestLibraryConvention)' == 'false' ">
+    <Error Text="No Version was specified. To build a Package Library, you must specify &lt;Version&gt;."/>
+  </Target>
+
+  <PropertyGroup Condition=" '$(FollowsTestLibraryConvention)' == 'true' ">
+    <IsPackable>false</IsPackable>
+    <IsPublishable>false</IsPublishable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="$(AssemblyName).Integration.Tests"/>
+    <InternalsVisibleTo Include="$(AssemblyName).Unit.Tests"/>
+  </ItemGroup>
+</Project>

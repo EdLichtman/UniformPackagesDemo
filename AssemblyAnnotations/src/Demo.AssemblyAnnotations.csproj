@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PathSeparator>$([System.IO.Path]::DirectorySeparatorChar)</PathSeparator>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="props$(PathSeparator)Demo.AssemblyAnnotations.props" Pack="true" PackagePath="\build" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,4 @@
+{
+    "$schema": "./build.schema.json",
+    "solution": "./Demo.Templates.PackageLibrary.sln"
+}

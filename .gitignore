@@ -38,13 +38,14 @@ x64/
 *.log
 *.vspscc
 *.vssscc
-*/.vs/*
-.vs/*
 .builds
 *.pidb
 *.log
 *.svclog
 *.scc
+
+**/.vs/**
+.vs/*
 
 # Visual C++ cache files
 ipch/

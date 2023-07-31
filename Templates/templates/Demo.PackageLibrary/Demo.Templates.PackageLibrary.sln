@@ -1,0 +1,60 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C97B9A8A-A753-46A0-BFD3-23FEBCF3F215}"
+	ProjectSection(SolutionItems) = preProject
+	EndProjectSection
+EndProject
+Project("{39602568-A2A3-4E9A-BF96-13C07B7FAC99}") = "src/Demo.Templates.PackageLibrary", "src\Demo.Templates.PackageLibrary.csproj", "{39749CDB-D4B8-4690-8C93-F6592837BECC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{646E3414-3FAB-41C6-922D-4750C806D63D}"
+	ProjectSection(SolutionItems) = preProject
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration", "{CAF617C8-FE67-4F88-AD87-E74045596992}"
+	ProjectSection(SolutionItems) = preProject
+	EndProjectSection
+EndProject
+Project("{B05CF017-FBD2-4E9A-A3D7-04EDF466FFE7}") = "tests/integration/Demo.Templates.PackageLibrary.Integration.Tests", "tests\integration\Demo.Templates.PackageLibrary.Integration.Tests.csproj", "{61469254-D9BE-4FD8-9EF1-95814A00373D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{4985E186-D108-4932-8E7E-4D7287843992}"
+	ProjectSection(SolutionItems) = preProject
+	EndProjectSection
+EndProject
+Project("{CD4C1827-6881-4279-AC4F-7FB4CDE96537}") = "tests/unit/Demo.Templates.PackageLibrary.Unit.Tests", "tests\unit\Demo.Templates.PackageLibrary.Unit.Tests.csproj", "{A640119F-747F-421A-ACE5-F4C94F086757}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{EE0C4866-57C5-4ED2-BC5D-AC0AA2B31CFF}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuke", ".nuke", "{0D4E08E9-1C5E-4758-BF4C-68367F19B4B3}"
+	ProjectSection(SolutionItems) = preProject
+		build.schema.json = build.schema.json
+		parameters.json = parameters.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{39749CDB-D4B8-4690-8C93-F6592837BECC} = {C97B9A8A-A753-46A0-BFD3-23FEBCF3F215}
+		{CAF617C8-FE67-4F88-AD87-E74045596992} = {646E3414-3FAB-41C6-922D-4750C806D63D}
+		{61469254-D9BE-4FD8-9EF1-95814A00373D} = {CAF617C8-FE67-4F88-AD87-E74045596992}
+		{4985E186-D108-4932-8E7E-4D7287843992} = {646E3414-3FAB-41C6-922D-4750C806D63D}
+		{A640119F-747F-421A-ACE5-F4C94F086757} = {4985E186-D108-4932-8E7E-4D7287843992}
+		{0D4E08E9-1C5E-4758-BF4C-68367F19B4B3} = {EE0C4866-57C5-4ED2-BC5D-AC0AA2B31CFF}
+	EndGlobalSection
+EndGlobal
