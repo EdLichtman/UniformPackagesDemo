@@ -1,0 +1,18 @@
+<Project>
+  <Target Name="Demo_DecoratePackageLibrary" BeforeTargets="Pack">
+    <PropertyGroup>
+      <PackageId>$(MSBuildProjectName)</PackageId>
+      <PackageTags>common lib,demo</PackageTags>
+    </PropertyGroup>
+
+    <PropertyGroup Label="DebugNuGetPackages">
+      <IncludeSymbols>true</IncludeSymbols>
+      <EmbedAllSources>True</EmbedAllSources>
+      <DebugType>embedded</DebugType>
+    </PropertyGroup>
+
+    <Error Condition=" '$(VersionPrefix)' == '$(Version)' " Text="No Version was specified. To build a Package Library, you must specify &lt;Version&gt;."/>
+    <Error Condition=" '$(Description)' == '' " Text="No Description was specified. To build a Package Library, you must specify &lt;Description&gt;."/>
+  
+  </Target>
+</Project>

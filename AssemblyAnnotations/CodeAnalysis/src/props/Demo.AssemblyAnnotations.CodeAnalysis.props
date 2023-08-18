@@ -3,7 +3,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <AnalysisLevel>6.0-recommended</AnalysisLevel>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
@@ -14,11 +13,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)..\content\stylecop.json" />
     <GlobalAnalyzerConfigFiles
-      Include="$(MSBuildThisFileDirectory)Demo.AssemblyAnnotations.CodeAnalysis.analyzerconfig" />
+      Include="$(MSBuildThisFileDirectory)..\content\Nx.AssemblyAnnotations.CodeAnalysis.analyzerconfig" />
   </ItemGroup>
 
-  <Target Name="EnsureProjectHasSolution" BeforeTargets="BeforeBuild" Condition="'$(SolutionDir)' == '*Undefined*'">
-    <Warning Text="Building Single Project without Solution. You must build a Solution in order to ensure Code Styles have been copied over. If code styles are already enabled, this warning can be disregarded."/>
+  <Target Name="Demo_WarnIfProjectHasNoSolution" BeforeTargets="BeforeBuild" Condition="'$(SolutionDir)' == '*Undefined*'">
+    <Warning Text="Building Single Project without Solution."/>
   </Target>
 </Project>

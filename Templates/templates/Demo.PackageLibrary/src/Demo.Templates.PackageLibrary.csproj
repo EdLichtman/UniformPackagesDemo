@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <AssemblyType>ClassLib</AssemblyType>
     <TargetFramework>net6.0</TargetFramework>
+    <Description></Description>
   </PropertyGroup>
 
   <ItemGroup>

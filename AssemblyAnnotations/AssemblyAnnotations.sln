@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.AssemblyAnnotations", "src\Demo.AssemblyAnnotations.csproj", "{6EDA3769-69F5-4306-9345-448B40BACD98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.AssemblyAnnotations.CodeAnalysis", "CodeAnalysis\src\Demo.AssemblyAnnotations.CodeAnalysis.csproj", "{38441CA1-8468-45D2-B04A-7327FEFA89CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysis", "{3A2B730E-2ABD-4826-9C7F-B7612C43A3A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EDA3769-69F5-4306-9345-448B40BACD98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EDA3769-69F5-4306-9345-448B40BACD98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EDA3769-69F5-4306-9345-448B40BACD98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EDA3769-69F5-4306-9345-448B40BACD98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38441CA1-8468-45D2-B04A-7327FEFA89CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38441CA1-8468-45D2-B04A-7327FEFA89CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38441CA1-8468-45D2-B04A-7327FEFA89CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38441CA1-8468-45D2-B04A-7327FEFA89CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{38441CA1-8468-45D2-B04A-7327FEFA89CA} = {3A2B730E-2ABD-4826-9C7F-B7612C43A3A6}
+	EndGlobalSection
+EndGlobal

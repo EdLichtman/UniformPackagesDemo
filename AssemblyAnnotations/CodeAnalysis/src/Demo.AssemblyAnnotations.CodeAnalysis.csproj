@@ -1,20 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+<PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <Description>The Strict Analyzers for ensuring clean, uniform code.</Description>
+    <AssemblyType>ClassLib</AssemblyType>
   </PropertyGroup>
-  <PropertyGroup>
-    <PathSeparator>$([System.IO.Path]::DirectorySeparatorChar)</PathSeparator>
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoDefaultExcludes>true</NoDefaultExcludes>
-  </PropertyGroup>
+
+  <Import Project="../../src/props/Demo.AssemblyAnnotations.props" />
+
   <ItemGroup>
-    <None Include="props$(PathSeparator)Demo.AssemblyAnnotations.CodeAnalysis.props" Pack="true" PackagePath="\build" />
-    <Content Include="content$(PathSeparator)Demo.AssemblyAnnotations.CodeAnalysis.analyzerconfig" Pack="true" PackagePath="\content" />
-    <Content Include="content$(PathSeparator)stylecop.json" Pack="true" PackagePath="\content" />
+    <None Include="props/Demo.AssemblyAnnotations.CodeAnalysis.props" Pack="true" PackagePath="\build" />
+    <Content Include="content/Demo.AssemblyAnnotations.CodeAnalysis.analyzerconfig" Pack="true" PackagePath="\content" />
+    <Content Include="content/stylecop.json" Pack="true" PackagePath="\content" />
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="None" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" IncludeInPackage="true"/>

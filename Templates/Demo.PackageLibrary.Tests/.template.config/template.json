@@ -5,19 +5,19 @@
         "language": "C#",
         "type": "project"
     },
-    "groupIdentity": "Demo.Templates.PackageLibrary.AddOn",
-    "identity": "Demo.Templates.PackageLibrary.AddOn",
-    "name": "Demo Package Library AddOn",
-    "description": "The base template for a well-organized package library without tests",
-    "shortName": "demo-lib-addon",
-    "sourceName": "Demo.Templates.PackageLibrary",
+    "groupIdentity": "Demo.PackageLibrary.AddOn.Tests",
+    "identity": "Demo.PackageLibrary.AddOn.Tests",
+    "name": "Demo Package Library AddOn Tests",
+    "description": "The base template for tests for a well-organized package library",
+    "shortName": "demo-lib-tests",
+    "sourceName": "Demo.PackageLibrary",
     "preferNameDirectory": false,
-    "defaultName": "Demo.PackageLibrary.AddOn",
+    "defaultName": "Demo.PackageLibrary.AddOn.Tests",
     "sources": [{
-        "source": "../Demo.PackageLibrary/",
+        "source": "..\\templates\\Demo.PackageLibrary",
         "modifiers": [{
             "exclude": [
-                "**/tests/**",
+                "**/src/**",
                 "**/[Bb]in/**",
                 "**/[Oo]bj/**",
                 "**/[Pp]ackages/**",
@@ -31,7 +31,9 @@
                 "Directory.Build.props",
                 "Directory.Build.targets",
                 "Directory.Packages.props",
-                "*.sln"
+                "*.sln",
+                ".config/**",
+                ".editorconfig"
             ]
         }]
     }]

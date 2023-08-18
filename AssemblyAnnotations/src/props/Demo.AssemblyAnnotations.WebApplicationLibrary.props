@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <IsPublishable>false</IsPublishable>
+    <IsPackable>false</IsPackable>
+    <SelfContained Condition="'$(SelfContained)' == ''">False</SelfContained>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' != 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+</Project>

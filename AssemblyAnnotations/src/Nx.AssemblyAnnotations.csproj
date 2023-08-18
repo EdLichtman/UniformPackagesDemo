@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+      <IsPackable>true</IsPackable>
+      <Description>The Assembly Annotations Library for uniform and succinct Nx Assemblies.</Description>
+      <NxAssemblyType>ClassLib</NxAssemblyType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="props/Nx.AssemblyAnnotations.PackageLibrary.props" Pack="true" PackagePath="\build" />
+    <None Include="props/Nx.AssemblyAnnotations.props" Pack="true" PackagePath="\build" />
+    <None Include="props/Nx.AssemblyAnnotations.TestLibrary.props" Pack="true" PackagePath="\build" />
+    <None Include="props/Nx.AssemblyAnnotations.Tool.props" Pack="true" PackagePath="\build" />
+    <None Include="props/Nx.AssemblyAnnotations.WebApplication.props" Pack="true" PackagePath="\build" />
+    <None Include="props/Nx.AssemblyAnnotations.WebApplicationLibrary.props" Pack="true" PackagePath="\build" />
+    <None Include="targets/Nx.AssemblyAnnotations.targets" Pack="true" PackagePath="\build" />
+  </ItemGroup>
+
+  <Import Project="props/Nx.AssemblyAnnotations.props" />
+</Project>

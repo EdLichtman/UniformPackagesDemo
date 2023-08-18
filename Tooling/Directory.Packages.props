@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="StyleCop.Analyzers" Version="1.1.118"/>
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1"/>
+    <PackageVersion Include="Demo.AssemblyAnnotations" Version="0.0.1"/>
+    <PackageVersion Include="Nuke.Common" Version="7.0.2"/>
   </ItemGroup>
 </Project>

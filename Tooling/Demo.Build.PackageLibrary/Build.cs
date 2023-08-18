@@ -1,48 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Nuke.Common;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
-using static NuGet.Packaging.PackagingConstants;
-// using Nuke.Common.ProjectModel;
 
-class Build : NukeBuild
+namespace Demo.Build.PackageLibrary;
+
+/// <summary>
+/// The main build script.
+/// </summary>
+public class Build : NukeBuild
 {
-    /// Support plugins are available for:
-    ///   - JetBrains ReSharper        https://nuke.build/resharper
-    ///   - JetBrains Rider            https://nuke.build/rider
-    ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
-    ///   - Microsoft VSCode           https://nuke.build/vscode
-
-    public static int Main() => Execute<Build>();
-
+    /// <summary>
+    /// The <see cref="AbsolutePath"/> to the solution. 
+    /// </summary>
     [Parameter("The solution file to sync this proj structure within.")]
-    readonly AbsolutePath? solution;
+    private readonly AbsolutePath? solution;
 
-    public Target Sync => _ => _
+    /// <summary>
+    /// Gets the Target that Syncs the solution
+    /// </summary>
+    public Target SyncSolution => _ => _
         .Executes(() =>
         {
-            var solutionFile = this.FindSolution();
-
-            var solutionPath = solutionFile.Parent;
+            var solutionFile = FindSolution(this.solution);
 
             var solutionRepresentation = solutionFile.Exists()
                 ? SolutionModelTasks.ParseSolution(solutionFile)
-                : SolutionModelTasks.CreateSolution(solutionFile, folderNameProvider: solution => solution.FileName);
+                : SolutionModelTasks.CreateSolution(solutionFile, folderNameProvider: sol => sol.FileName);
 
-            this.ClearSolution(solutionRepresentation);
-            this.AddProjects(solutionRepresentation);
-            this.AddSolutionFiles(solutionRepresentation);
+            ClearSolution(solutionRepresentation);
+            AddProjects(solutionRepresentation);
+            AddSolutionFiles(solutionRepresentation);
             solutionRepresentation.Save();
         });
 
-    private AbsolutePath FindSolution()
+    /// <summary>
+    /// The Main Execute method
+    /// </summary>
+    /// <returns>The exit code</returns>
+    public static int Main()
     {
-        AbsolutePath? foundSolution = null;
+        return Execute<Build>();
+    }
+
+    /// <summary>
+    /// Finds the Solution from root.
+    /// </summary>
+    /// <param name="solutionFile">The proposed solution file path.</param>
+    /// <returns>The <see cref="AbsolutePath"/> of the solution.</returns>
+    private static AbsolutePath FindSolution(AbsolutePath? solutionFile)
+    {
+        AbsolutePath? foundSolution = solutionFile;
         var workingDirectory = RootDirectory;
-        while (workingDirectory.Parent != null && workingDirectory.Parent != workingDirectory)
+        while (foundSolution == null && workingDirectory.Parent != null && workingDirectory.Parent != workingDirectory)
         {
             var solutions = workingDirectory.GlobFiles("*.sln");
             if (solutions.Any())
@@ -50,10 +62,11 @@ class Build : NukeBuild
                 if (solutions.Count > 1)
                 {
                     Console.WriteLine("Solutions:");
-                    foreach (var solution in solutions)
+                    foreach (var target in solutions)
                     {
-                        Console.WriteLine(solution);
+                        Console.WriteLine(target);
                     }
+
                     Assert.Fail("Found more than one Solution in directory. Could not determine Solution to add project to.");
                 }
 
@@ -63,76 +76,114 @@ class Build : NukeBuild
             workingDirectory = workingDirectory.Parent;
         }
 
-        var solutionFile = solution ?? foundSolution;
-
-        if (solutionFile == null)
+        if (foundSolution == null)
         {
             Assert.Fail("No valid Solution found and none provided. Try again while including the 'solution' parameter");
         }
 
-        if (solutionFile?.Extension != ".sln")
+        if (foundSolution?.Extension != ".sln")
         {
             Assert.Fail("'solution' provided was not a valid .sln file.");
         }
 
-        return solutionFile!;
+        return foundSolution!;
     }
 
-    private void ClearSolution(Solution solution)
+    /// <summary>
+    /// Clears the solution
+    /// </summary>
+    /// <param name="target">The <see cref="Solution"/> to clear</param>
+    private static void ClearSolution(Solution target)
     {
-        foreach (var project in solution.AllProjects)
+        foreach (var project in target.AllProjects)
         {
-            solution.RemoveProject(project);
+            target.RemoveProject(project);
         }
 
-        foreach (var folder in solution.AllSolutionFolders)
+        foreach (var folder in target.AllSolutionFolders)
         {
-            solution.RemoveSolutionFolder(folder);
+            target.RemoveSolutionFolder(folder);
         }
     }
 
-    private void AddProjects(Solution solution)
+    /// <summary>
+    /// Adds Projects to the <see cref="Solution"/>
+    /// </summary>
+    /// <param name="target">The target <see cref="Solution"/>.</param>
+    private static void AddProjects(Solution target)
     {
-        var projects = solution.Path.Parent.GlobFiles("**/*.csproj");
+        var projects = target.Path!.Parent.GlobFiles("**/*.csproj");
         foreach (var project in projects)
         {
-            this.AddProjects(solution, project);
+            AddProjects(target, project);
         }
     }
 
-    private void AddProjects(Solution solution, AbsolutePath projectPath)
+    /// <summary>
+    /// Adds Projects to the <see cref="Solution"/>
+    /// </summary>
+    /// <param name="target">The target <see cref="Solution"/>.</param>
+    /// <param name="projectPath">The Project Path</param>
+    private static void AddProjects(Solution target, AbsolutePath projectPath)
     {
-        var relativePath = solution.Path.Parent
+        var relativePath = target.Path!.Parent
             .GetRelativePathTo(projectPath)
             .ToUnixRelativePath();
 
         var project = relativePath.ToString().Replace(".csproj", string.Empty);
         var subPaths = project.Split("/");
+        var projectName = subPaths.Last();
+        var typeId = ProjectType.CSharpProject.FirstGuid;
         if (subPaths.Contains("tests", StringComparer.OrdinalIgnoreCase))
         {
-            var folder = solution.GetSolutionFolder("tests") ?? solution.AddSolutionFolder("tests");
-            solution.AddProject(project, Guid.NewGuid(), projectPath, solutionFolder: folder);
+            var folder = target.GetSolutionFolder("tests") ?? target.AddSolutionFolder("tests");
+            AddBuildConfiguration(target.AddProject(projectName, typeId, projectPath, solutionFolder: folder));
         }
         else
         {
-            solution.AddProject(project, Guid.NewGuid(), projectPath);
+            AddBuildConfiguration(target.AddProject(projectName, typeId, projectPath));
         }
     }
 
-    private void AddSolutionFiles(Solution solution)
+    /// <summary>
+    /// Adds Solution Files to the <see cref="Solution"/>
+    /// </summary>
+    /// <param name="target">The target <see cref="Solution"/>.</param>
+    private static void AddSolutionFiles(Solution target)
     {
-        var items = solution.Path.Parent.GlobFiles("*").Where(file => file.Name != solution.Path.Name).Select(x => x.Name).ToList();
-        var solutionFolder = solution.AddSolutionFolder("Solution Files");
+        var items = target.Path!.Parent.GlobFiles("*").Where(file => file.Name != target.Path.Name).Select(x => x.Name)
+            .ToList();
+        var solutionFolder = target.AddSolutionFolder("Solution Files");
         foreach (var item in items)
         {
             solutionFolder.Items.Add(item, item);
         }
 
-        var nukeFiles = solution.Path.Parent.GlobFiles(".nuke/*").Select(x => x.Name);
-        var nukeSolutionFolder = solution.AddSolutionFolder(".nuke", solutionFolder: solutionFolder);
+        var nukeFiles = target.Path.Parent.GlobFiles(".nuke/*").Select(x => x.Name);
+        var nukeSolutionFolder = target.AddSolutionFolder(".nuke", solutionFolder: solutionFolder);
         foreach (var nukeFile in nukeFiles.Select(file => $".nuke/{file}"))
         {
             nukeSolutionFolder.Items.Add(nukeFile, nukeFile);
+        }
+    }
+
+    /// <summary>
+    /// Adds the Build Configuration for a project
+    /// </summary>
+    /// <param name="project">The <see cref="Project"/>.</param>
+    private static void AddBuildConfiguration(Project project)
+    {
+        List<string> knownConfigurations = new()
+        {
+            "Develop",
+            "Debug",
+            "Release"
+        };
+
+        foreach (var configuration in knownConfigurations)
+        {
+            project.Configurations.Add($"{configuration}|Any CPU.ActiveCfg", $"{configuration}|Any CPU");
+            project.Configurations.Add($"{configuration}|Any CPU.Build.0", $"{configuration}|Any CPU");
         }
     }
 }
