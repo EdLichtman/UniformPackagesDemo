@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>A Package to demonstrate that build transtive should flow to the children.</Description>
+    <AssemblyType>ClassLib</AssemblyType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Demo.AssemblyAnnotations" />
+    <PackageReference Include="DependencyHellParent" VersionOverride="0.0.1"/>
+  </ItemGroup>
+</Project>

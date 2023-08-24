@@ -1,0 +1,35 @@
+<Project>
+
+  <ItemGroup>
+    <RequiredGlobalProperty Include="MyTestProperty"/>
+  </ItemGroup>
+
+  <!-- Notice here, this thing basically will error if a property doesn't exist in the parent - BuildTransitive should always flow to any child -->
+  <Target Name="AddGlobalPropertiesAssemblyMetadata" BeforeTargets="BeforeBuild" Condition="@(GlobalProperty -> Count()) != 0">
+    <ItemGroup> 
+      <GlobalProperty Update="@(GlobalProperty)" Visible="false"/>
+      <GlobalPropertyAttributes Include="System.Reflection.AssemblyMetadataAttribute">
+        <_Parameter1>%(GlobalProperty.Identity)</_Parameter1>
+        <_Parameter2>%(GlobalProperty.Value)</_Parameter2>
+      </GlobalPropertyAttributes>
+    </ItemGroup>
+    <WriteCodeFragment AssemblyAttributes="@(GlobalPropertyAttributes)" Language="C#" OutputDirectory="$(CompilerGeneratedFilesOutputPath)" OutputFile="GlobalProperties.g.cs">
+      <Output TaskParameter="OutputFile" ItemName="Compile" />
+      <Output TaskParameter="OutputFile" ItemName="FileWrites" />
+    </WriteCodeFragment>
+  </Target>
+  <Target Name="ValidateGlobalPropertiesAssemblyMetadata" BeforeTargets="AddGlobalPropertiesAssemblyMetadata" Condition="@(RequiredGlobalProperty -> Count()) != 0">
+    <ItemGroup>
+      <RequiredGlobalProperty Update="@(RequiredGlobalProperty)" Visible="false"/>
+      <GlobalPropertyRequirements Include="%(RequiredGlobalProperty.Identity)"/>
+    </ItemGroup>
+    <FindInList CaseSensitive="true" List="@(GlobalProperty)" ItemSpecToFind="%(GlobalPropertyRequirements.Identity)">
+      <Output TaskParameter="ItemFound" ItemName="FullfilledPropertyRequirements"/>
+    </FindInList>
+    <ItemGroup>
+      <GlobalPropertyRequirements Remove="%(FullfilledPropertyRequirements.Identity)"/>
+    </ItemGroup>
+    <Error Condition="@(GlobalPropertyRequirements -> Count()) != 0" Text="Not all Global Properties have been Configured in your Build. Please add the following Properties to a respective &lt;PropertyGroup&gt;: @(GlobalPropertyRequirements)"/>
+  </Target>
+
+</Project>

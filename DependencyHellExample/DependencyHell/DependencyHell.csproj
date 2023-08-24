@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>A Package to demonstrate that build transtive should flow to the children.</Description>
+    <AssemblyType>ClassLib</AssemblyType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Demo.AssemblyAnnotations" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="buildTransitive\DependencyHell.props" Pack="true" PackagePath="/buildTransitive" />
+  </ItemGroup>
+
+</Project>
