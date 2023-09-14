@@ -21,7 +21,8 @@
                 ".nuke/build.schema.json",
                 ".vs/**",
                 "src/**",
-                "tests/**"
+                "tests/**",
+                "*.sln"
             ]
         }]
     }]
