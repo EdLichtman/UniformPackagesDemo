@@ -9,7 +9,7 @@
     <NukeTelemetryVersion>1</NukeTelemetryVersion>
     <PackAsTool>true</PackAsTool>
     <Description>The build executable for Package Libraries</Description>
-    <AssemblyType>DotNetTool</AssemblyType>
+    <AssemblyType>DotNetToolAssembly</AssemblyType>
   </PropertyGroup>
 
   <ItemGroup>
