@@ -4,22 +4,29 @@
       <PackageType>Template</PackageType>
       <PackageId>Demo.Templates</PackageId>
       <Version>0.0.1</Version>
-      <Title>Demo Templates</Title>
+      <Title>Demo Template</Title>
       <Authors>Edward Lichtman</Authors>
-      <Description>Templates to use when creating an application for this demo.</Description>
-      <PackageTags>dotnet-new;templates;nx</PackageTags>
+      <Description>Templates to use when creating an application for my demo.</Description>
+      <PackageTags>dotnet-new;templates;Demo</PackageTags>
       <TargetFramework>net6.0</TargetFramework>
+      <NoDefaultExcludes>true</NoDefaultExcludes>
       <IncludeContentInPack>true</IncludeContentInPack>
       <IncludeBuildOutput>false</IncludeBuildOutput>
       <ContentTargetFolders>content</ContentTargetFolders>
+      <!-- For NU5128 (Since net6.0 is the Framework, but there is no lib/ref directory -->
+      <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
 
-      <!-- <PackageIcon>logo.png</PackageIcon> -->
+      <PackageIcon>logo.png</PackageIcon>
       <OutputDir>bin\</OutputDir>
+
+      <NoWarn>$(NoWarn);NU5110;NU5111;</NoWarn>
     </PropertyGroup>
   
     <ItemGroup>
-      <Content Include="templates\**\*" />
+      <Content Include="templates\**\*"/>
+      <Content Include="Demo.*\**"/>
       <Content Remove="**\bin\**" />
+      <Content Remove="**\output\**" />
       <Content Remove="**\obj\**" />
       <Content Remove="**\packages\**" />
       <Content Remove="**\*.filelist" />
@@ -29,6 +36,6 @@
       <Content Remove="**\.nuke\temp\**" />
 
       <Compile Remove="**\*" />
-      <!-- <Content Include=".\logo.png" PackagePath="\" /> -->
+      <Content Include=".\logo.png" PackagePath="\" />
     </ItemGroup>
   </Project>
