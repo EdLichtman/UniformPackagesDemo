@@ -48,7 +48,7 @@ internal static class DemoAssemblyTypeMethods
     {
         return TryGetAssemblyTypeAnnotation(
                    optionsProvider,
-                   out var DemoAssemblyType)
-               && DemoAssemblyType == DemoAssemblyType.PackageAssembly;
+                   out var demoAssemblyType)
+               && demoAssemblyType == DemoAssemblyType.PackageAssembly;
     }
 }

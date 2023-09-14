@@ -7,7 +7,7 @@
         "namingRules": {
             "allowedNamespaceComponents": ["log4net"],
             "allowCommonHungarianPrefixes": true,
-            "allowedHungarianPrefixes": ["id","is","to","qc","db", "cc" /* common abbreviation of Call Center */, "un", "nx"]
+            "allowedHungarianPrefixes": ["id","is","to","qc","db", "cc"]
         },
         "documentationRules": {
             "documentPrivateElements": true,

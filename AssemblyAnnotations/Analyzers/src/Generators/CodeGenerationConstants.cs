@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Demo.AssemblyAnnotations.RoslynAnalyzers.Generators;
+namespace Demo.AssemblyAnnotations.Analyzers.Generators;
 
 /// <summary>
 /// The Constants to be used in code generation.

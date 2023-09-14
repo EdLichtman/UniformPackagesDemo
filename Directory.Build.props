@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageOutputPath>$(MSBuildThisFileDirectory)PublishedPackages</PackageOutputPath>
   </PropertyGroup>
 </Project>

@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Demo.AssemblyAnnotations.Abstractions;
 
-namespace Demo.AssemblyAnnotations.CodeAnalysis.Analyzers.Diagnostics;
+namespace Demo.AssemblyAnnotations.Analyzers.Diagnostics;
 
 /// <summary>
 /// The Analyzer for the AppSettings

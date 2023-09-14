@@ -33,7 +33,7 @@ public partial class DemoAssemblyConfigurationAnalyzer
     /// Gets the Missing CompilerVisibleProperty Diagnostic Descriptor
     /// </summary>
     private static readonly DiagnosticDescriptor MissingDemoAssemblyPropertyDiagnosticDescriptor = new(
-        "DemoA1000",
+        "DEMO1000",
         "Missing DemoAssembly Property",
         "No '{0}' Property was configured, or it was configured but is not visible to the compiler. " +
             "Be sure to include <{0}></{0}> in a <PropertyGroup> and <CompilerVisibleProperty Include=\"{0}\"/> in an <ItemGroup>.",

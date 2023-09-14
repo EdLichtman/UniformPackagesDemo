@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <DemoAssemblyType>PackageAssembly</DemoAssemblyType>
-    <TargetFramework>net6.0</TargetFramework>
     <Description></Description>
   </PropertyGroup>
 
