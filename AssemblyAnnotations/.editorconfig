@@ -10,3 +10,9 @@ indent_size = 2
 indent_size = 4
 insert_final_newline = true
 charset = utf-8-bom
+
+# Use of 'var' instead of type declaration 
+dotnet_diagnostic.IDE0007.severity = warning
+dotnet_diagnostic.IDE0008.severity = none
+# -- For Demo, Switch this to true
+csharp_style_var_for_built_in_types = true

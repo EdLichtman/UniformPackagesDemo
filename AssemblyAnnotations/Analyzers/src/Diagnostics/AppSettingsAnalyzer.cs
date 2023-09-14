@@ -17,7 +17,7 @@ public class AppSettingsAnalyzer : DiagnosticAnalyzer
     /// Gets the Missing CompilerVisibleProperty Diagnostic Descriptor
     /// </summary>
     private static readonly DiagnosticDescriptor MissingAppSettingsDiagnosticDescriptor = new(
-        "DemoA1201",
+        "DEMO1201",
         "Missing App Settings",
         "WebHost assembly requires AppSettings however no AppSettings were included as Additional Files. Be sure to include appSettings.json as AdditionalFiles.",
         "Configuration",

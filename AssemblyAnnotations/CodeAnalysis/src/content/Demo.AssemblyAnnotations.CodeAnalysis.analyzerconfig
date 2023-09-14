@@ -6,9 +6,10 @@ global_level = 999
 dotnet_analyzer_diagnostic.category-CodeQuality.severity = warning
 dotnet_analyzer_diagnostic.category-Style.severity = error
 
-# Use of 'var' instead of type declaration
+# Use of 'var' instead of type declaration 
 dotnet_diagnostic.IDE0007.severity = warning
-dotnet_diagnostic.IDE0008.severity = none
+dotnet_diagnostic.IDE0008.severity = warning
+# -- For Demo, Switch this to true
 csharp_style_var_for_built_in_types = true
 
 # Allow declared namespaces

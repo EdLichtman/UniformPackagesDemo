@@ -3,6 +3,7 @@
     <DemoAssemblyType>SatelliteAssembly</DemoAssemblyType>
     <Description>The Roslyn Analyzers for Demo.AssemblyAnnotations Code Analysis.</Description>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <NoWarn>RS2002</NoWarn>
   </PropertyGroup>
 
   <Import Project="../../src/build/Demo.AssemblyAnnotations.props" />
