@@ -1,6 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <ToolCommandName>$([System.String]::Copy('$(MSBuildProjectName)').ToLower().Replace('.','-'))</ToolCommandName>
-    <OutputType>Exe</OutputType>
-  </PropertyGroup>
-</Project>
