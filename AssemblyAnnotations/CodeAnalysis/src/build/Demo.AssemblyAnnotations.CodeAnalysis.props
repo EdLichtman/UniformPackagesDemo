@@ -1,0 +1,29 @@
+<Project>
+  <PropertyGroup>
+    <PathSeparator>$([System.IO.Path]::DirectorySeparatorChar)</PathSeparator>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <AnalysisLevel>6.0-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Develop'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>    
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)..\content\stylecop.json" Visible="false"/>
+    <GlobalAnalyzerConfigFiles
+      Include="$(MSBuildThisFileDirectory)..\content\Demo.AssemblyAnnotations.CodeAnalysis.analyzerconfig" />
+  </ItemGroup>
+
+
+  <Target Name="Demo_WarnIfProjectHasNoSolution" BeforeTargets="BeforeBuild" Condition="'$(SolutionDir)' == '*Undefined*'">
+    <Warning Text="Building Single Project without Solution."/>
+  </Target>
+</Project>
