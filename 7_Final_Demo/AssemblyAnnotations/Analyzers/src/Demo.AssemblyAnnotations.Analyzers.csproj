@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <DemoAssemblyType>SatelliteAssembly</DemoAssemblyType>
+    <Description>The Roslyn Analyzers for Demo.AssemblyAnnotations Code Analysis.</Description>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <NoWarn>RS2002</NoWarn>
+  </PropertyGroup>
+
+  <Import Project="../../src/build/Demo.AssemblyAnnotations.props" />
+  <Import Project="../../CodeAnalysis/src/build/Demo.AssemblyAnnotations.CodeAnalysis.props" />
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all"/>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="AnalyzerReleases.Shipped.md" />
+    <AdditionalFiles Include="AnalyzerReleases.Unshipped.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Abstractions\src\Demo.AssemblyAnnotations.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Diagnostics\DemoAssemblyConfigurationAnalyzer.Descriptors.cs">
+      <DependentUpon>DemoAssemblyConfigurationAnalyzer.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

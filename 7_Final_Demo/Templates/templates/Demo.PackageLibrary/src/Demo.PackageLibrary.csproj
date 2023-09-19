@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <DemoAssemblyType>PackageAssembly</DemoAssemblyType>
+    <Description></Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Demo.AssemblyAnnotations" PrivateAssets="all"/>
+    <PackageReference Include="Demo.AssemblyAnnotations.CodeAnalysis" PrivateAssets="all"/>
+  </ItemGroup>
+</Project>

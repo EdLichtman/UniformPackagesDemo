@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <DemoAssemblyType>PackageAssembly</DemoAssemblyType>
+    <Description>The Strict Demo Analyzers for ensuring clean, uniform code.</Description>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+  </PropertyGroup>
+
+  <Import Project="../../src/build/Demo.AssemblyAnnotations.props" />
+
+  <ItemGroup>
+    <Content Include="build/Demo.AssemblyAnnotations.CodeAnalysis.props" Pack="true" PackagePath="\build" />
+    <Content Include="content/Demo.AssemblyAnnotations.CodeAnalysis.analyzerconfig" Pack="true" PackagePath="\content" />
+    <Content Include="content/stylecop.json" Pack="true" PackagePath="\content" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="None"/>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="build\" />
+  </ItemGroup>
+</Project>

@@ -1,5 +1,0 @@
-<Project>
-  <ItemGroup Condition=" '$(DemoAssemblyType)' == 'WebHostAssembly' ">
-    <AdditionalFiles Include="$(MsBuildProjectDirectory)/appSettings.json"/>
-  </ItemGroup>
-</Project>
