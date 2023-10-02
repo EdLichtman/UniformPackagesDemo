@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Edward Lichtman",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "groupIdentity": "Demo.Retrospective",
+    "identity": "Demo.Retrospective",
+    "name": "Demo Retrospective",
+    "description": "The base template for starting a demo retrospective",
+    "shortName": "retro",
+    "preferNameDirectory": false,
+    "symbols": {
+        "fileDate": {
+            "type": "generated",
+            "generator": "now",
+            "parameters": {
+                "format": "yyyy-MM-dd"
+            },
+            "replaces": "{FileDate}",
+            "fileRename": "{FileDate}"
+        },
+        "formatDate": {
+            "type": "generated",
+            "generator": "now",
+            "parameters": {
+                "format": "MMMM dd, yyyy"
+            },
+            "replaces": "{FormatDate}"
+        }
+    }
+}

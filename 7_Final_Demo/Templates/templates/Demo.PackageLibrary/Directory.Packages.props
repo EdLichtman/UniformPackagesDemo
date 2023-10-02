@@ -1,12 +1,11 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <DemoAssemblyAnnotationsVersion>[0.0.1,1)</DemoAssemblyAnnotationsVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.2.0"/>
-    <PackageVersion Include="Demo.AssemblyAnnotations" Version="$(DemoAssemblyAnnotationsVersion)" />
-    <PackageVersion Include="Demo.AssemblyAnnotations.CodeAnalysis" Version="$(DemoAssemblyAnnotationsVersion)" />
+    <PackageVersion Include="Demo.AssemblyAnnotations" Version="0.0.1" />
+    <PackageVersion Include="Demo.AssemblyAnnotations.CodeAnalysis" Version="0.0.1" />
     <PackageVersion Include="Moq" Version="4.16.1" />
     <PackageVersion Include="NUnit" Version="3.13.3" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.2.1" />

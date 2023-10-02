@@ -12,7 +12,7 @@
     "shortName": "demo-dir",
     "preferNameDirectory": false,
     "sources": [{
-        "source": "..\\templates\\Demo.PackageLibrary",
+        "source": "../templates/Demo.PackageLibrary",
         "modifiers": [{
             "exclude": [
                 // todo: Figure out how to get .nuke folder to appear without anything in it.

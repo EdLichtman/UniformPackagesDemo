@@ -14,10 +14,9 @@
     "preferNameDirectory": false,
     "defaultName": "Demo.PackageLibrary",
     "sources": [{
-        "source": "..\\templates\\Demo.PackageLibrary",
+        "source": "../templates/Demo.PackageLibrary",
         "modifiers": [{
             "exclude": [
-                "**/tests/**",
                 "**/[Bb]in/**",
                 "**/[Oo]bj/**",
                 "**/[Pp]ackages/**",
@@ -32,7 +31,6 @@
                 "Directory.Build.props",
                 "Directory.Build.targets",
                 "Directory.Packages.props",
-                "*.sln",
                 ".config/**"
             ]
         }]
