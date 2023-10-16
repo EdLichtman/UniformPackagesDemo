@@ -5,11 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <PropertyGroup>
-    <!--<AnalysisLevel>latest-recommended</AnalysisLevel>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>-->
+    <PackageOutputPath>$(MSBuildThisFileDirectory)PublishedPackages</PackageOutputPath>
   </PropertyGroup>
-
 </Project>

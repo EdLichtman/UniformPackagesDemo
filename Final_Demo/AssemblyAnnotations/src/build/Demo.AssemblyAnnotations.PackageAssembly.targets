@@ -13,7 +13,8 @@
       <PropertyGroup>
         <Authors>Edward Lichtman</Authors>
         <PackageId>$(MSBuildProjectName)</PackageId>
-        <PackageTags>common lib,demo</PackageTags>
+        <PackageTags>$(PackageTags);common lib,demo</PackageTags>
+        <Copyright></Copyright>
       </PropertyGroup>
     </Target>
 </Project>

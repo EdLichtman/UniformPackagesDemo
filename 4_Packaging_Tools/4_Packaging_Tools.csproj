@@ -4,7 +4,7 @@
     <PackageId>DemoTime</PackageId>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>_6_Packaging_Tools</RootNamespace>
+    <RootNamespace>DemoTime</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

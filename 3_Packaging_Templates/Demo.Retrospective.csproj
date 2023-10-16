@@ -11,10 +11,12 @@
       <TargetFramework>net6.0</TargetFramework>
       <NoDefaultExcludes>true</NoDefaultExcludes>
       <IncludeContentInPack>true</IncludeContentInPack>
+      
       <IncludeBuildOutput>false</IncludeBuildOutput>
-      <ContentTargetFolders>content</ContentTargetFolders>
-      <!-- For NU5128 (Since net6.0 is the Framework, but there is no lib/ref directory -->
       <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+
+      <ContentTargetFolders>content</ContentTargetFolders>
+
       <OutputDir>bin\</OutputDir>
 
       <NoWarn>$(NoWarn);NU5110;NU5111;</NoWarn>
