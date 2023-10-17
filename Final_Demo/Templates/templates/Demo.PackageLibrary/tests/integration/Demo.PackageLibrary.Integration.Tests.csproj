@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <DemoAssemblyType>TestAssembly</DemoAssemblyType>
+    <IsPackable>false</IsPackable>
+    <IsPublishable>false</IsPublishable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />

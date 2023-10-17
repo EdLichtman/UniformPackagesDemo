@@ -1,0 +1,5 @@
+<Project InitialTargets="EnsurePackablePackageHasDescription">
+  <Target Name="EnsurePackablePackageHasDescription">
+    <Error Condition=" '$(IsPackable)' == 'true' and '$(Description)' == '' " Code="DEMO1001" Text="Package must have a Description so it can be well-understood."/>
+  </Target>
+</Project>

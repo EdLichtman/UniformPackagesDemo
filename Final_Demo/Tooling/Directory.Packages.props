@@ -1,9 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageVersion Include="Demo.AssemblyAnnotations" Version="0.0.1"/>
-    <PackageVersion Include="Nuke.Common" Version="7.0.2"/>
-  </ItemGroup>
-</Project>

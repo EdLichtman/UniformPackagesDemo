@@ -1,4 +1,14 @@
 <Project>
+
+    <Target Name="AnnotatePackageAssembly" BeforeTargets="GenerateMSBuildEditorConfigFileCore">
+      <PropertyGroup>
+        <Authors>Edward Lichtman</Authors>
+        <PackageId>$(MSBuildProjectName)</PackageId>
+        <PackageTags>$(PackageTags);common lib,demo</PackageTags>
+        <Copyright>Copyright © Edward Lichtman $([System.DateTime]::Now.ToString(`yyyy`))</Copyright>
+      </PropertyGroup>
+    </Target>
+
       <!--
   To use, add the PackageVersion or ExactVersion attribute to the <ProjectReference>
   i.e.
@@ -40,43 +50,82 @@
       </ItemGroup>
     </Target>
 
-    <!-- For every PackageReference with Pack=true, we include the TargetPathWithTargetPlatformMoniker
-       using a combination of these scripts -->
-    <!-- https://til.cazzulino.com/msbuild/how-to-include-package-reference-files-in-your-nuget-package -->
-    <!-- https://turnerj.com/blog/the-pain-points-of-csharp-source-generators -->
-    <!-- Adds all DependencyTargetPaths for all dependencies so we don't have to list each one. -->
-    <!-- <PropertyGroup>
-        <GetTargetPathDependsOn>
-            $(GetTargetPathDependsOn);GetDependencyTargetPaths
-        </GetTargetPathDependsOn>
-    </PropertyGroup> -->
+<!--#Section:
+  The following targets and includes allow you to copy assets from a dependent assembly with PackageReferenceAsset
+  For example, if you want to add System.Text.Json to the /analyzers/dotnet/cs directory in the package, you'd add:
+    <PackageReferenceAsset Include="System.Text.Json" PackagePath="analyzers/dotnet/cs" Dependency="compile"/>
+-->
     <Target 
-      Name="AddGenerationTimeReferences" 
+      Name="AddGenerationTimePackageAssets" 
       BeforeTargets="GetTargetPathWithTargetPlatformMoniker"
       AfterTargets="ResolvePackageDependenciesForBuild"
+      Condition="@(PackageReferenceAsset -&gt; Count()) &gt; 0"
       Outputs="%(ResolvedCompileFileDefinitions.NuGetPackageId)">
-        <ItemGroup>
-            <NuGetPackageId Include="@(ResolvedCompileFileDefinitions -> '%(NuGetPackageId)')" />
-        </ItemGroup>
-        <PropertyGroup>
-            <NuGetPackageId>@(NuGetPackageId -&gt; Distinct())</NuGetPackageId>
-        </PropertyGroup>
-        <ItemGroup>
-            <PackageReferenceDependency Include="@(PackageReference -> WithMetadataValue('Identity', $(NuGetPackageId)))"/>
-        </ItemGroup>
-        <ItemGroup>
-          <PackableReferenceDependency Include="@(PackageReferenceDependency -> WithMetadataValue('Pack', 'true'))"/>
-        </ItemGroup>
-        <PropertyGroup>
-          <PackableReferenceDependency>@(PackableReferenceDependency -&gt; Distinct())</PackableReferenceDependency>
-        </PropertyGroup>
-        <ItemGroup>
-            <ResolvedPackableCompileFileDefinitions
-              Include="@(ResolvedCompileFileDefinitions -&gt; WithMetadataValue('NuGetPackageId', '$(PackableReferenceDependency)'))" />
-        </ItemGroup>
-        <ItemGroup>
-            <!-- <TargetPathWithTargetPlatformMoniker Include="@(ResolvedPackableCompileFileDefinitions)" IncludeRuntimeDependency="false" /> -->
-            <None Include="@(ResolvedPackableCompileFileDefinitions)" Pack="true" PackagePath="analyzers/dotnet/cs" />
-        </ItemGroup>
+      <!-- Find The current Package Reference -->
+      <ItemGroup>
+        <_NuGetPackageId Include="@(ResolvedCompileFileDefinitions -> '%(NuGetPackageId)')" />
+      </ItemGroup>
+      <!-- find the PackageId for that reference -->
+      <PropertyGroup>
+        <_NuGetPackageId>@(_NuGetPackageId -&gt; Distinct())</_NuGetPackageId>
+      </PropertyGroup>
+      <!-- Find the PackageReferenceAsset dependencies that match this NuGet Package Id  -->
+      <ItemGroup>
+        <_PackageReferenceAssetDependency Include="@(PackageReferenceAsset -> WithMetadataValue('Identity', $(_NuGetPackageId)))"/>
+      </ItemGroup> 
+      <PropertyGroup>
+        <_PackageReferenceAssetDependencyCount>@(_PackageReferenceAssetDependency -&gt; Count())</_PackageReferenceAssetDependencyCount>
+        <_ShouldPackageAsset>False</_ShouldPackageAsset>
+        <_ShouldPackageAsset Condition="$(_PackageReferenceAssetDependencyCount) != 0">True</_ShouldPackageAsset>
+      </PropertyGroup>
+      <Error Condition= "'$(_ShouldPackageAsset)' == 'True' and '%(_PackageReferenceAssetDependency.Dependency)' != 'compile' " Text="'%(_PackageReferenceAssetDependency.Identity)' PackageReferenceAsset was included but Dependency was set to '%(_PackageReferenceAssetDependency.Dependency)'. This configuration is not yet supported."/>
+      <!-- Resolve their path on disc for assets. -->
+      <ItemGroup Condition=" '$(_ShouldPackageAsset)' == 'True' ">
+        <_ResolvedPackableCompileFileDefinitions Include="@(ResolvedCompileFileDefinitions -&gt; WithMetadataValue('NuGetPackageId', '$(_NuGetPackageId)'))">
+          <PackagePath>@(_PackageReferenceAssetDependency -&gt; '%(PackagePath)')</PackagePath>
+        </_ResolvedPackableCompileFileDefinitions>
+      </ItemGroup>
+      <ItemGroup Condition=" '$(_ShouldPackageAsset)' == 'True' ">
+        <!-- For Project References -->
+        <TargetPathWithTargetPlatformMoniker Include="@(_ResolvedPackableCompileFileDefinitions)" IncludeRuntimeDependency="false" />
+        <!-- For Package References -->
+        <None 
+          Include="%(_ResolvedPackableCompileFileDefinitions.Identity)" 
+          Pack="true" 
+          PackagePath="%(_ResolvedPackableCompileFileDefinitions.PackagePath)" 
+          Visible="false"/>
+      </ItemGroup>
     </Target>
+    <Target
+    Name="AddGenerationTimeProjectAssets" 
+    BeforeTargets="GetTargetPathWithTargetPlatformMoniker"
+    AfterTargets="AddGenerationTimePackageAssets"
+    Condition="@(PackageReferenceAsset -&gt; Count()) &gt; 0">
+      <!-- Find all package reference Assets and group them into a new Item -->
+      <ItemGroup>
+        <_ProjectReferenceAsset Include="@(PackageReferenceAsset)"/>
+      </ItemGroup>
+      <!-- Remove any where the Identity is part of Resolved Compile File Definitions -->
+      <ItemGroup>
+        <_ProjectReferenceAsset Remove="@(TargetPathWithTargetPlatformMoniker -&gt; '%(NuGetPackageId)')"></_ProjectReferenceAsset>
+      </ItemGroup>
+      <PropertyGroup>
+        <_ProjectReferenceAssetDependencyCount>@(_ProjectReferenceAsset -&gt; Count())</_ProjectReferenceAssetDependencyCount>
+        <_ShouldPackageAsset>False</_ShouldPackageAsset>
+        <_ShouldPackageAsset Condition="$(_ProjectReferenceAssetDependencyCount) != 0">True</_ShouldPackageAsset>
+      </PropertyGroup>
+      <Error Condition= "'$(_ShouldPackageAsset)' == 'True' and '%(_ProjectReferenceAsset.Dependency)' != 'compile' " Text="'%(_ProjectReferenceAsset.Identity)' PackageReferenceAsset was included but Dependency was set to '%(_ProjectReferenceAsset.Dependency)'. This configuration is not yet supported."/>
+      <ItemGroup Condition=" '$(_ShouldPackageAsset)' == 'True' ">
+        <None 
+          Condition=" '%(_ProjectReferenceAsset.Dependency)' == 'compile' " 
+          Include="$(OutputPath)\**\%(_ProjectReferenceAsset.Identity).dll" 
+          Pack="true" 
+          PackagePath="%(_ProjectReferenceAsset.PackagePath)" 
+          Visible="false"
+        />
+      </ItemGroup>
+    </Target>
+    <ItemGroup>
+      <PackageReferenceAsset Update="*" Visible="false"/>
+    </ItemGroup>
 </Project>

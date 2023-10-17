@@ -21,9 +21,4 @@
     <GlobalAnalyzerConfigFiles
       Include="$(MSBuildThisFileDirectory)..\content\Demo.AssemblyAnnotations.CodeAnalysis.analyzerconfig" />
   </ItemGroup>
-
-
-  <Target Name="Demo_WarnIfProjectHasNoSolution" BeforeTargets="BeforeBuild" Condition="'$(SolutionDir)' == '*Undefined*'">
-    <Warning Text="Building Single Project without Solution."/>
-  </Target>
 </Project>

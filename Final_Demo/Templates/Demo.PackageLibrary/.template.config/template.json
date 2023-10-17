@@ -15,24 +15,128 @@
     "defaultName": "Demo.PackageLibrary",
     "sources": [{
         "source": "../templates/Demo.PackageLibrary",
+        "exclude": [
+            "**/[Bb]in/**",
+            "**/[Oo]bj/**",
+            "**/[Pp]ackages/**",
+            "**/.template.config/**/*",
+            "**/*.filelist",
+            "**/*.user",
+            "**/*.lock.json",
+            "**/.vs/**",
+            "**/.idea/**",
+            ".editorconfig",
+            ".config/**"
+        ],
         "modifiers": [{
-            "exclude": [
-                "**/[Bb]in/**",
-                "**/[Oo]bj/**",
-                "**/[Pp]ackages/**",
-                "**/.template.config/**/*",
-                "**/*.filelist",
-                "**/*.user",
-                "**/*.lock.json",
-                "**/.vs/**",
-                "**/.idea/**",
-                "**/.nuke/**",
-                ".editorconfig",
-                "Directory.Build.props",
-                "Directory.Build.targets",
-                "Directory.Packages.props",
-                ".config/**"
+                "condition": "(package-type == 'Leaf')",
+                "exclude": [
+                    "Directory.Build.props",
+                    "Directory.Build.targets",
+                    "Directory.Packages.props",
+                    "*.sln"
+                ]
+            },
+            {
+                "condition": "(skip-tests == 'Unit')",
+                "exclude": [
+                    "tests/unit/**"
+                ]
+            },
+            {
+                "condition": "(skip-tests == 'Integration')",
+                "exclude": [
+                    "tests/integration/**"
+                ]
+            }
+        ]
+    }],
+    "symbols": {
+        "package-type": {
+            "datatype": "choice",
+            "type": "parameter",
+            "isRequired": true,
+            "choices": [{
+                    "choice": "Root",
+                    "description": "The starting selection for a library. It will contain props, targets and central package management."
+                },
+                {
+                    "choice": "Leaf",
+                    "description": "The sub-selection for a library. It is intended to be a named child of a Root or other Leaf package."
+                }
             ]
-        }]
-    }]
+        },
+        "skip-tests": {
+            "datatype": "choice",
+            "type": "parameter",
+            "allowMultipleValues": true,
+            "choices": [{
+                    "choice": "Integration",
+                    "description": "Skips creating the integration tests."
+                },
+                {
+                    "choice": "Unit",
+                    "description": "Skips creating the unit tests."
+                }
+            ]
+        },
+        "is-props-root": {
+            "datatype": "bool",
+            "type": "parameter",
+            "description": "A value indicating whether the solution is the Directory.Build.props root, or whether it inherits from the parent.",
+            "defaultValue": "false"
+        }
+    },
+    // "primaryOutputs": [{
+    //         "path": "src/Demo.PackageLibrary.csproj"
+    //     },
+    //     {
+    //         "path": "tests/integration/Demo.PackageLibrary.Integration.Tests.csproj",
+    //         "condition": "(skip-tests != 'Integration')"
+    //     },
+    //     {
+    //         "path": "tests/unit/Demo.PackageLibrary.Unit.Tests.csproj",
+    //         "condition": "(skip-tests != 'Unit')"
+    //     }
+    // ],
+    "postActions": [{
+            "description": "Add leaf project to solution",
+            "manualInstructions": [{ "text": "Add generated leaf project to solution manually." }],
+            "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
+            "args": {
+                "projectFiles": [
+                    "Demo.PackageLibrary.csproj"
+                ],
+                "inRoot": true
+            },
+            "continueOnError": true,
+            "condition": "package-type == 'Leaf'"
+        },
+        {
+            "description": "Add leaf project integration test to solution",
+            "manualInstructions": [{ "text": "Add generated leaf project integration tests to solution manually." }],
+            "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
+            "args": {
+                "projectFiles": [
+                    "Demo.PackageLibrary.Integration.Tests.csproj"
+                ],
+                "solutionFolder": "tests/integration"
+            },
+            "continueOnError": true,
+            "condition": "(package-type == 'Leaf') && (skip-tests != 'Integration')"
+        },
+        {
+            "description": "Add leaf project unit test to solution",
+            "manualInstructions": [{ "text": "Add generated leaf project unit tests to solution manually." }],
+            "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
+            "args": {
+                "projectFiles": [
+                    "Demo.PackageLibrary.Unit.Tests.csproj"
+                ],
+                "solutionFolder": "tests/unit"
+            },
+            "continueOnError": true,
+            "condition": "(package-type == 'Leaf') && (skip-tests != 'Unit')"
+        }
+    ]
 }

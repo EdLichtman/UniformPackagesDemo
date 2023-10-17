@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "Demo.Build.PackageLibrary": {
-      "commandName": "Project",
-      "commandLineArgs": "Sync --root C:\\Users\\elich\\source\\repos\\UniformPackagesDemo\\Packages\\Metadata",
-      "workingDirectory": "C:\\Users\\elich\\source\\repos\\UniformPackagesDemo\\Packages\\Metadata"
-    }
-  }
-}

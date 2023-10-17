@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
 
   <!-- This file prevents unintended imports of unrelated MSBuild files -->
   <!-- Uncomment to include parent Directory.Build.props file -->
+  <!--#if(is-props-root)-->
+  <!-- <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" /> -->
+  <!--#else-->
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+  <!--#endif-->
 
   <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
     <Version>0.0.1</Version>
   </PropertyGroup>
 

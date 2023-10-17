@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Content Include="build/Demo.AssemblyAnnotations.CodeAnalysis.props" Pack="true" PackagePath="\build" />
+    <Content Include="build/Demo.AssemblyAnnotations.CodeAnalysis.targets" Pack="true" PackagePath="\build" />
     <Content Include="content/Demo.AssemblyAnnotations.CodeAnalysis.analyzerconfig" Pack="true" PackagePath="\content" />
     <Content Include="content/stylecop.json" Pack="true" PackagePath="\content" />
   </ItemGroup>
@@ -19,7 +20,4 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="build\" />
-  </ItemGroup>
 </Project>

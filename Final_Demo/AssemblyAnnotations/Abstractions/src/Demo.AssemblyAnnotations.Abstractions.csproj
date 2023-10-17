@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <DemoAssemblyType>SatelliteAssembly</DemoAssemblyType>
-    <Description>The Assembly Annotations Class Abstractions Library for uniform and succinct Demo Assemblies.</Description>
-  </PropertyGroup>
-  
-  <Import Project="../../src/build/Demo.AssemblyAnnotations.props" />
-  <Import Project="../../CodeAnalysis/src/build/Demo.AssemblyAnnotations.CodeAnalysis.props" />
-</Project>

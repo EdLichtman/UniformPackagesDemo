@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <DemoAssemblyType>PackageAssembly</DemoAssemblyType>
     <Description></Description>
   </PropertyGroup>
 

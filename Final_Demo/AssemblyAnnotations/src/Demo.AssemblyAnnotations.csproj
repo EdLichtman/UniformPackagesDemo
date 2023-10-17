@@ -9,24 +9,7 @@
   
   <ItemGroup>
     <Content Include="build\Demo.AssemblyAnnotations.props" Pack="true" PackagePath="\build" />
-    <Content Include="build\Demo.AssemblyAnnotations.PackageAssembly.targets" Pack="true" PackagePath="\build" />
-    <Content Include="build\Demo.AssemblyAnnotations.TestAssembly.targets" Pack="true" PackagePath="\build" />
-    <Content Include="build\Demo.AssemblyAnnotations.DotNetToolAssembly.targets" Pack="true" PackagePath="\build" />
-    <Content Include="build\Demo.AssemblyAnnotations.WebHostAssembly.targets" Pack="true" PackagePath="\build" />
-    <Content Include="build\Demo.AssemblyAnnotations.SatelliteAssembly.targets" Pack="true" PackagePath="\build" />
     <Content Include="build\Demo.AssemblyAnnotations.targets" Pack="true" PackagePath="\build" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Abstractions\src\Demo.AssemblyAnnotations.Abstractions.csproj" PrivateAssets="all"/>
-    <ProjectReference Include="..\Analyzers\src\Demo.AssemblyAnnotations.Analyzers.csproj" PrivateAssets="all"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="\lib"/>
-    <Content Include="$(OutputPath)\$(AssemblyName).Abstractions.dll" Pack="true" PackagePath="\lib"/>
-    <Content Include="$(OutputPath)\$(AssemblyName).Abstractions.dll" Pack="true" PackagePath="\analyzers\dotnet\cs"/>
-    <Content Include="$(OutputPath)\$(AssemblyName).Analyzers.dll" Pack="true" PackagePath="\analyzers\dotnet\cs"/>
   </ItemGroup>
 
   <Import Project="build/Demo.AssemblyAnnotations.props" />
