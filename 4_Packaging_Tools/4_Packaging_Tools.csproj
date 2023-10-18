@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <PackageId>DemoTime</PackageId>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>DemoTime</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -10,6 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>demo-time</ToolCommandName>
   </PropertyGroup>

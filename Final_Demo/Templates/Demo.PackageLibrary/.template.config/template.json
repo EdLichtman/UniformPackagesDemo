@@ -87,18 +87,6 @@
             "defaultValue": "false"
         }
     },
-    // "primaryOutputs": [{
-    //         "path": "src/Demo.PackageLibrary.csproj"
-    //     },
-    //     {
-    //         "path": "tests/integration/Demo.PackageLibrary.Integration.Tests.csproj",
-    //         "condition": "(skip-tests != 'Integration')"
-    //     },
-    //     {
-    //         "path": "tests/unit/Demo.PackageLibrary.Unit.Tests.csproj",
-    //         "condition": "(skip-tests != 'Unit')"
-    //     }
-    // ],
     "postActions": [{
             "description": "Add leaf project to solution",
             "manualInstructions": [{ "text": "Add generated leaf project to solution manually." }],

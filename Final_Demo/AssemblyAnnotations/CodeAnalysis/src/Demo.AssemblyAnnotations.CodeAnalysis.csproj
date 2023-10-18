@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <DemoAssemblyType>PackageAssembly</DemoAssemblyType>
     <Description>The Strict Demo Analyzers for ensuring clean, uniform code.</Description>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoPackageAnalysis>true</NoPackageAnalysis>
