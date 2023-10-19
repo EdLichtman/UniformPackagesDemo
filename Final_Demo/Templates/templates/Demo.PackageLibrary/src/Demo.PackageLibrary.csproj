@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description></Description>
+    <Description>Test</Description>
   </PropertyGroup>
 
   <ItemGroup>
