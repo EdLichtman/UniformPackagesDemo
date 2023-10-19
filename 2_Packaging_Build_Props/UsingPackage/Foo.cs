@@ -8,7 +8,7 @@ namespace PackagingBuildProps
 {
     public class Foo
     {
-        public static void Bar()
+        public void Bar()
         {
             var hello = "test";
             var world = "hello";
