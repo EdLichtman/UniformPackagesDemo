@@ -1,9 +1,5 @@
 <Project>
   <PropertyGroup>
-    <PathSeparator>$([System.IO.Path]::DirectorySeparatorChar)</PathSeparator>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
